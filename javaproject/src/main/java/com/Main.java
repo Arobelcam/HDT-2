@@ -28,15 +28,17 @@ public final class Main {
         Scanner scanner = new Scanner(System.in); // permite leer datos desde terminal 
         boolean continuar = true; // continuara el ciclo de iteraciones del menu 
         int opcion = 0; // guarda la opcion del usuario
+        Pila pila = new Pila(); // creación objeto de clase pila 
 
         while(continuar!=false) {
             System.out.println("Bienvenido\n¿Deseas operar la calculadora?\n1. Sí\n2. No");
             opcion = isInt(scanner); // se valida y escanea la opcion del usuario
-
+          
             if(opcion==1) {
                 // llamada para hacer lectura
                 readFile();
                 // llamada de calculadora 
+                System.out.println("---\nEl resultado es: " + pila.calculate("incluir expresion leida aqui")+"\n---");   
             } else {
                 continuar = false; // se debe de cerrar el ciclo
                 System.out.println("Gracias por usar este simulador");
