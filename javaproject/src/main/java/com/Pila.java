@@ -1,6 +1,5 @@
 package com;
 import java.util.Vector;
-
 /**
  * Clase que modela el comportamiento de una pila y funcionamiento de una calculadora
  * @author Aarón Beltrán
@@ -16,8 +15,7 @@ public class Pila implements Stack<Double>, Calculator{
 
     @Override
     public void add(Double item) {
-        vector.add(item);
-        
+        vector.add(item);        
     }
 
     @Override
