@@ -8,9 +8,9 @@ import java.util.Vector;
  * @since 30/enero/2022
  */
 public class Pila implements Stack<Double>, Calculator{
-    Vector <Double> vector; //Se crea el vector que almacena datos del tipo double
-    Throwable n; // permite crear propios errores 
-    String expresion="";
+    private Vector <Double> vector; //Se crea el vector que almacena datos del tipo double
+    private Throwable n; // permite crear propios errores 
+    private String expresion="";
     public Pila(){vector = new Vector<>();}    
 
     @Override
