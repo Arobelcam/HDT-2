@@ -9,7 +9,8 @@ package com;
  */
 
 //imports
-import java.util.Scanner;
+import java.util.*;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 
@@ -29,6 +30,7 @@ public final class Main {
         boolean continuar = true; // continuara el ciclo de iteraciones del menu 
         int opcion = 0; // guarda la opcion del usuario
         Pila pila = new Pila(); // creación objeto de clase pila 
+        BufferedReader file;
 
         while(continuar!=false) {
             System.out.println("Bienvenido\n¿Deseas operar la calculadora?\n1. Sí\n2. No");
@@ -37,6 +39,7 @@ public final class Main {
             if(opcion==1) {
                 // llamada para hacer lectura
                 readFile();
+                
                 // llamada de calculadora 
                 System.out.println("---\nEl resultado es: " + pila.calculate("incluir expresion leida aqui")+"\n---");   
             } else {
@@ -66,10 +69,13 @@ public final class Main {
      */
     private static void readFile() {
         try {
-            File myObj = new File("datos.txt");
+            File myObj = new File("datos.txt"); //se guarda el archivo en un objeto tipo file
             Scanner myReader = new Scanner(myObj);
+            /*se lee la linea del file */
             while (myReader.hasNextLine()) {
-              String data = myReader.nextLine();
+              String data = myReader.nextLine(); //se guarda 
+              List<String> list = new ArrayList<String>();//se crea una nueva arraylist
+              list.add(data); //se agrega al arraylist
               System.out.println(data);
             }
             myReader.close();
