@@ -1,11 +1,23 @@
 package com;
+/**Universidad del Valle de Guatemala
+ * @author Aaron Beltran
+ * @author Diana Diaz
+ * @author Mariel Guamuche 
+ * 
+ * Algoritmos y estructuras de datos 
+ * Hoja de trabajo 2
+ */
+
+//imports
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Hello world!
  */
-public final class App {
-    private App() {
+public final class Main {
+    private Main() {
     }
 
     /**
@@ -20,10 +32,12 @@ public final class App {
         while(continuar!=false) {
             System.out.println("Bienvenido\n¿Deseas operar la calculadora?\n1. Sí\n2. No");
             opcion = isInt(scanner); // se valida y escanea la opcion del usuario
-
+            Pila pila = new Pila();
             if(opcion==1) {
                 // llamada para hacer lectura
+                readFile();
                 // llamada de calculadora 
+                System.out.println("---\nEl resultado es: " + pila.calculate("incluir expresion leida aqui")+"\n---");   
             } else {
                 continuar = false; // se debe de cerrar el ciclo
                 System.out.println("Gracias por usar este simulador");
@@ -44,5 +58,23 @@ public final class App {
             }
         }
         return number;
+    }
+
+    /**
+     * Metodo para leer archivos
+     */
+    private static void readFile() {
+        try {
+            File myObj = new File("datos.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+              String data = myReader.nextLine();
+              System.out.println(data);
+            }
+            myReader.close();
+          } catch (FileNotFoundException e) {
+            System.out.println("Ha ocurrido un error.");
+            e.printStackTrace();
+          }
     }
 }
