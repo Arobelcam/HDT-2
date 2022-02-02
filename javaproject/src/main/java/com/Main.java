@@ -1,5 +1,17 @@
 package com;
+/**Universidad del Valle de Guatemala
+ * @author Aaron Beltran
+ * @author Diana Diaz
+ * @author Mariel Guamuche 
+ * 
+ * Algoritmos y estructuras de datos 
+ * Hoja de trabajo 2
+ */
+
+//imports
 import java.util.Scanner;
+import java.io.File;
+import java.io.FileNotFoundException;
 
 /**
  * Hello world!
@@ -23,6 +35,7 @@ public final class Main {
 
             if(opcion==1) {
                 // llamada para hacer lectura
+                readFile();
                 // llamada de calculadora 
             } else {
                 continuar = false; // se debe de cerrar el ciclo
@@ -44,5 +57,23 @@ public final class Main {
             }
         }
         return number;
+    }
+
+    /**
+     * Metodo para leer archivos
+     */
+    private static void readFile() {
+        try {
+            File myObj = new File("datos.txt");
+            Scanner myReader = new Scanner(myObj);
+            while (myReader.hasNextLine()) {
+              String data = myReader.nextLine();
+              System.out.println(data);
+            }
+            myReader.close();
+          } catch (FileNotFoundException e) {
+            System.out.println("Ha ocurrido un error.");
+            e.printStackTrace();
+          }
     }
 }
