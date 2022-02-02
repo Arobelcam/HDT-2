@@ -1,41 +1,41 @@
 package com;
 
+import java.util.Vector;
+
 public class Pila implements Stack<Double>, Calculator{
+    Vector <Double> vector; //Se crea el vector que almacena datos del tipo double
+    
+    public Pila(){vector = new Vector<Double>();}
 
     @Override
     public double calculate(String operation) {
-        // TODO Auto-generated method stub
         return 0;
     }
 
     @Override
     public void add(Double item) {
-        // TODO Auto-generated method stub
+        vector.add(item);
         
     }
 
     @Override
     public Double remove() {
-        // TODO Auto-generated method stub
-        return null;
+         return vector.remove(size() - 1);
     }
 
     @Override
     public Double peek() {
-        // TODO Auto-generated method stub
-        return null;
+        return vector.get(size());
     }
 
     @Override
     public boolean empty() {
-        // TODO Auto-generated method stub
-        return false;
+        return size() == 0;
     }
 
     @Override
     public int size() {
-        // TODO Auto-generated method stub
-        return 0;
+        return  vector.size();
     }
     
 }

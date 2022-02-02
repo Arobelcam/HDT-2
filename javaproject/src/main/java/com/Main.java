@@ -4,8 +4,8 @@ import java.util.Scanner;
 /**
  * Hello world!
  */
-public final class App {
-    private App() {
+public final class Main {
+    private Main() {
     }
 
     /**
