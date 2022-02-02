@@ -29,8 +29,8 @@ public final class Main {
         Scanner scanner = new Scanner(System.in); // permite leer datos desde terminal 
         boolean continuar = true; // continuara el ciclo de iteraciones del menu 
         int opcion = 0; // guarda la opcion del usuario
-        Pila pila = new Pila(); // creación objeto de clase pila 
-        BufferedReader file;
+        Pila pila = new Pila(); // creación objeto de clase pila         
+        List<String> list = new ArrayList<>();//se crea una nueva arraylist
 
         while(continuar!=false) {
             System.out.println("Bienvenido\n¿Deseas operar la calculadora?\n1. Sí\n2. No");
@@ -38,10 +38,13 @@ public final class Main {
           
             if(opcion==1) {
                 // llamada para hacer lectura
-                readFile();
-                
-                // llamada de calculadora 
-                System.out.println("---\nEl resultado es: " + pila.calculate("incluir expresion leida aqui")+"\n---");   
+                readFile(list);
+                int i=1;
+                for (String string : list) {
+                    // llamada de calculadora 
+                    System.out.println(i+". El resultado es: " + pila.calculate(string)+"\n-----");  
+                    i++;
+                }                 
             } else {
                 continuar = false; // se debe de cerrar el ciclo
                 System.out.println("Gracias por usar este simulador");
@@ -67,16 +70,16 @@ public final class Main {
     /**
      * Metodo para leer archivos
      */
-    private static void readFile() {
+    private static void readFile(List<String> list) {
         try {
             File myObj = new File("datos.txt"); //se guarda el archivo en un objeto tipo file
             Scanner myReader = new Scanner(myObj);
             /*se lee la linea del file */
             while (myReader.hasNextLine()) {
               String data = myReader.nextLine(); //se guarda 
-              List<String> list = new ArrayList<String>();//se crea una nueva arraylist
+              
               list.add(data); //se agrega al arraylist
-              System.out.println(data);
+              //System.out.println(data);
             }
             myReader.close();
           } catch (FileNotFoundException e) {

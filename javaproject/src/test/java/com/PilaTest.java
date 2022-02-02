@@ -33,8 +33,10 @@ class PilaTest {
 
     @Test
     void testCalculate() throws Exception {
-        assertEquals( Math.abs(Math.log(0)), this.pil.calculate("1 0 / 3+")); // validar este test
-        assertEquals(15, this.pil.calculate("1 2 + 4 * 3 +"));       
+        assertEquals(-0.00001, this.pil.calculate("1 0 /")); // valor de error de defecto
+        assertEquals(15, this.pil.calculate("1 2 + 4 * 3 +"));
+        assertEquals(-0.00001, this.pil.calculate("oh no")); // valor de defecto      
+        assertEquals(6.25, this.pil.calculate("1 4 / 6+"));
     }
 
     @Test

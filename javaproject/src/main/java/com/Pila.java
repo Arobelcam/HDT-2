@@ -10,7 +10,7 @@ import java.util.Vector;
 public class Pila implements Stack<Double>, Calculator{
     Vector <Double> vector; //Se crea el vector que almacena datos del tipo double
     Throwable n; // permite crear propios errores 
-
+    String expresion="";
     public Pila(){vector = new Vector<>();}    
 
     @Override
@@ -41,6 +41,8 @@ public class Pila implements Stack<Double>, Calculator{
     @Override
     public double calculate(String operation) {
         try {
+            this.expresion=operation;
+            this.vector.clear(); // se limpia el vector antes de iniciarse 
             for (int i = 0; i < operation.length(); i++) {
                 if(isOperator(operation.substring(i, i+1))) {                
                     operate(operation.substring(i, i+1));                                                
@@ -52,7 +54,7 @@ public class Pila implements Stack<Double>, Calculator{
             }             
             return this.vector.remove(size() - 1);                                                           
         } 
-        catch (IndexOutOfBoundsException e){
+        catch (Exception e){
             System.err.println("No ha ingresado una expresión postfix. Valide su entrada, se mostrará -.00001 como valor default");
             return -0.00001;
         }                   
@@ -82,43 +84,42 @@ public class Pila implements Stack<Double>, Calculator{
      */
     private void operate(String operador) {
         if(this.vector.isEmpty()) {
-            n = new Throwable("No hay objetos dentro del vector para ser procesados");
+            n = new Throwable(this.expresion+" generó el siguiente error: No hay objetos suficientesdentro del vector para ser procesados");
             System.err.println(n.getMessage());
         } else {   
             if(this.vector.size()>=2) {
                 Double b = this.vector.remove(this.vector.size()-1); // se obtiene el elemento b
                 Double a = this.vector.remove(this.vector.size()-1); // se obtiene el elemento a
-                Double resultado=0.0;
+                
                 switch(operador) {
                     case "+":
-                        resultado = a+b;
+                        this.vector.add(a+b);
                     break;
                     case "-":
-                        resultado = a-b;
+                        this.vector.add(a-b);
                     break;
                     case "*":
-                        resultado = a*b;
+                        this.vector.add(a*b);
                     break;
                     case "/":
                         try {                            
                             if(b.equals(0.0)) {
-                                n = new Throwable("Error. División entre cero tiene por resultado infinito, está es una asíntota vertical");
-                                System.err.println(n.getMessage());
-                                resultado = a;
+                                n = new Throwable(this.expresion+" esta expresión produjó el siguiente Error. División entre cero tiene por resultado infinito, está es una asíntota vertical. Será omitida la división y valores previos al error.");
+                                System.err.println(n.getMessage());                                
                             } else {
-                                resultado = a/b;
+                                this.vector.add(a/b);
                             }
                         } catch(ArithmeticException e) {
-                            n = new Throwable("Error. División entre cero tiene por resultado infinito, está es una asíntota vertical");
+                            n = new Throwable("Error. División entre cero tiene por resultado infinito, está es una asíntota vertical. Expresión: "+this.expresion);
                             System.err.println(n.getMessage());
                         }
                     break;
                     default:
                     break;
                 }
-                this.vector.add(resultado); // agrega el resultado al stack de Vector 
+                
             } else {
-                n = new Throwable("Error en su expresión postfix. No hay suficientes argumentos numéricos para ser operados previo al primer operador. Se mostrará el resultado omitiendo dicho operador");
+                n = new Throwable(this.expresion+" produjó este error en su expresión postfix: No hay suficientes argumentos numéricos para ser operados previo al primer operador. Se mostrará el resultado omitiendo dicho operador y número.");
                 System.err.println(n.getMessage());
             }                   
         }         
